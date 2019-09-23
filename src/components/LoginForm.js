@@ -5,18 +5,18 @@ import { Redirect } from 'react-router-dom';
 class LoginForm extends Component {
   state={
     "email-input": "",
-    "password-input": "",
+    "pw-input": "",
     logined: false
   }
   handleChange = e => {
-    console.log(this.state);
     this.setState(
       {[e.target.id] : e.target.value}
     );
   }
   tryLogin = () => {
-    if (this.state["email-input"] === "swpp@snu.ac.kr" && this.state["password-input"] === "iluvswpp"){
-      this.setState({loginSucceed : true});
+    if (this.state["email-input"] === "id" && this.state["pw-input"] === "pw"){
+    //if (this.state["email-input"] === "swpp@snu.ac.kr" && this.state["password-input"] === "iluvswpp"){
+      this.setState({logined : true});
     }
     else alert ("Email or password is wrong");
   }
@@ -32,13 +32,11 @@ class LoginForm extends Component {
           id="email-input"
           placeholder="email"
           onChange={this.handleChange}
-          
           />
           <input
           id="pw-input"
           placeholder="password"
           onChange={this.handleChange}
-          // value={this.state.phone}
           />
           </form>
           <button id="login-button" onClick={() => this.tryLogin()}>Login</button>
