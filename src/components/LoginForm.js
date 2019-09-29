@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 
 import { Redirect } from 'react-router-dom';
+import * as ActionCreators from "../actions/index";
+import { connect } from "react-redux";
 
 class LoginForm extends Component {
+  componentDidMount(){
+    this.props.onGetAllUser();
+  }
   state={
     "email-input": "",
     "pw-input": "",
@@ -44,5 +49,11 @@ class LoginForm extends Component {
       );
     }
   }
+
+  const mapDispatchToProps = dispatch => {
+    return {
+      onGetAllUser: () => dispatch(ActionCreators.getUsers())
+    }
+  }
   
-  export default LoginForm;
+  export default connect(null, mapDispatchToProps)(LoginForm);
