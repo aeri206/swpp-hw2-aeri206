@@ -4,8 +4,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as ActionCreators from "../actions/index";
 import { withRouter } from 'react-router';
-
+import { Redirect } from 'react-router-dom';
 import Article from "../components/Article";
+import LogoutForm from "../components/LogoutForm";
 
 class ArticleList extends Component {
     componentDidMount() {
@@ -14,7 +15,11 @@ class ArticleList extends Component {
       clickArticleHandler = (ar) => {
         this.props.history.push('/articles/' + ar.id);
       }
+      onClickCreate = () => {
+        this.props.history.push('/articles/create');
+      }
     render(){
+      if (this.props.loginedUser === null) return (<Redirect to='/login' />);
       const articles = this.props.storedArticles.map(ar => {
         let author = this.props.storedUsers.filter(user => user.id === ar.author_id);
         return (
@@ -30,10 +35,17 @@ class ArticleList extends Component {
       });
     return (
     <div className="ArticleList">
+      <LogoutForm/>
     <div className='title'>
       {this.props.title}
     </div>
-    {articles}
+    <div className='user'>
+      Logined Information <p/>
+      name : {this.props.loginedUser.name} <p/>
+      email : {this.props.loginedUser.email} <p/>
+    </div>
+    <button id="create-article-button" onClick={this.onClickCreate}>Create Article</button>
+    <div>{articles}</div>
     
   </div>);
         
@@ -44,7 +56,8 @@ class ArticleList extends Component {
 const mapStateToProps = state => {
     return {
       storedArticles : state.articleData.articles,
-      storedUsers: state.userData.users
+      storedUsers: state.userData.users,
+      loginedUser : state.userData.loginedUser
     };
   }
 

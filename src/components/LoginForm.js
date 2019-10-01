@@ -19,8 +19,8 @@ class LoginForm extends Component {
     );
   }
   tryLogin = () => {
-    if (this.state["email-input"] === "id" && this.state["pw-input"] === "pw"){
-    //if (this.state["email-input"] === "swpp@snu.ac.kr" && this.state["password-input"] === "iluvswpp"){
+    if (this.state["email-input"] === "swpp@snu.ac.kr" && this.state["pw-input"] === "iluvswpp"){
+      this.props.onSetLoginUser(1);
       this.setState({logined : true});
     }
     else alert ("Email or password is wrong");
@@ -50,10 +50,17 @@ class LoginForm extends Component {
     }
   }
 
+  const mapStateToProps = state => {
+    return {
+      storedUsers: state.userData.users
+    }
+  }
+
   const mapDispatchToProps = dispatch => {
     return {
-      onGetAllUser: () => dispatch(ActionCreators.getUsers())
+      onGetAllUser: () => dispatch(ActionCreators.getUsers()),
+      onSetLoginUser: id => dispatch(ActionCreators.login(id))
     }
   }
   
-  export default connect(null, mapDispatchToProps)(LoginForm);
+  export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

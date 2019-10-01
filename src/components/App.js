@@ -6,6 +6,7 @@ import './App.css';
 import LoginForm from "./LoginForm";
 import ArticleList from "../containers/ArticleList";
 import ArticleDetail from "../containers/ArticleDetail";
+import ArticleWrite from "../containers/ArticleWrite";
 
 import * as types from "../actions/ActionType";
 
@@ -18,9 +19,11 @@ class App extends Component {
         <Switch>
           <Route path='/login' exact render={() => <LoginForm title="Login Page" />} />
           <Redirect exact from='/' to='/login' />
-          <Route path='/articles/:id' exact component={ArticleDetail} />
+          <Route path="/articles/create" exact render={()=><ArticleWrite mode="create"/>}/>
           <Route path="/articles" exact render={() =><ArticleList title="ArticleList!" /> } />
-          <Route render={() => <h1>Not Found</h1>} />
+          <Route path='/articles/:id' exact component={ArticleDetail} />
+          <Route path="/articles/:id/edit" exact render={()=><ArticleWrite mode="edit"/>}/>
+          <Route render={() => <h1>Not Founddd</h1>} />
         </Switch>
       </div>
     </BrowserRouter>
