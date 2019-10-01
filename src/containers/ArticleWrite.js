@@ -31,7 +31,7 @@ class ArticleWrite extends Component {
         
         return(
             <div>
-                <LogoutForm/>
+                <LogoutForm history={this.props.history}/>
         <WriteForm
             oldState={mode}
             edit={this.props.mode==="edit" ? true : false}

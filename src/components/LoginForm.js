@@ -10,8 +10,7 @@ class LoginForm extends Component {
   }
   state={
     "email-input": "",
-    "pw-input": "",
-    logined: false
+    "pw-input": ""
   }
   handleChange = e => {
     this.setState(
@@ -20,19 +19,21 @@ class LoginForm extends Component {
   }
   tryLogin = () => {
     if (this.state["email-input"] === "swpp@snu.ac.kr" && this.state["pw-input"] === "iluvswpp"){
-      this.props.onSetLoginUser(1);
-      this.setState({logined : true});
+      this.props.onSetLoginUser(1, this.props);
     }
     else alert ("Email or password is wrong");
   }
   render(){
-    let redirect = null;
-    if (this.state.logined) {
-      redirect = <Redirect to='/articles' />
+    if (this.props.storedUsers !== null) {
+      const loginedUser = this.props.storedUsers.filter(user => user.logged_in);
+      if(loginedUser.length === 1){
+        const {id} = loginedUser[0];
+        this.props.onUpdateLoginUser(id);
+        return (<Redirect to='/articles' />)
+      }
     }
     return(
       <div>
-        {redirect}
         <form><input
           id="email-input"
           placeholder="email"
@@ -44,7 +45,7 @@ class LoginForm extends Component {
           onChange={this.handleChange}
           />
           </form>
-          <button id="login-button" onClick={() => this.tryLogin()}>Login</button>
+          <button id="login-button" onClick={this.tryLogin}>Login</button>
           </div>
       );
     }
@@ -52,14 +53,16 @@ class LoginForm extends Component {
 
   const mapStateToProps = state => {
     return {
-      storedUsers: state.userData.users
+      storedUsers: state.userData.users,
+      loginedUser : state.userData.loginedUser
     }
   }
 
   const mapDispatchToProps = dispatch => {
     return {
       onGetAllUser: () => dispatch(ActionCreators.getUsers()),
-      onSetLoginUser: id => dispatch(ActionCreators.login(id))
+      onSetLoginUser: (id, ownProps) => dispatch(ActionCreators.login(id, ownProps)),
+      onUpdateLoginUser : (id) => dispatch(ActionCreators.alreadyLogined(id))
     }
   }
   

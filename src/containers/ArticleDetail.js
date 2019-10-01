@@ -35,7 +35,7 @@ class ArticleDetail extends Component {
         }
         return(
             <div>
-                <LogoutForm/>
+                <LogoutForm history={this.props.history}/>
                 <h2 id='article-title'>{ar.title}</h2>
                 <h3 id='article-author'>{name}</h3>
                 <h4 id='article-content'>{ar.content}</h4>

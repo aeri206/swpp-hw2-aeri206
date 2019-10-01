@@ -9,18 +9,16 @@ import articleReducers from "./reducers/reducers";
 import userReducers from "./reducers/userReducers";
 import commentReducers from "./reducers/commentReducers";
 import { Provider } from 'react-redux';
-import * as types from "./actions/ActionType"
 import thunk from "redux-thunk";
 
-import axios from 'axios';
 
 
 const logger = store => {
     return next => {
       return action => {
-//         console.log('[Middleware] Dispatching', action);
+    //    console.log('[Middleware] Dispatching', action);
         const result = next(action);
-        console.log('[Middleware] Next State', store.getState());
+       //console.log('[Middleware] Next State', store.getState());
         return result;
       };
     };

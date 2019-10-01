@@ -8,7 +8,7 @@ import ArticleList from "../containers/ArticleList";
 import ArticleDetail from "../containers/ArticleDetail";
 import ArticleWrite from "../containers/ArticleWrite";
 
-import * as types from "../actions/ActionType";
+// import * as types from "../actions/ActionType";
 
 class App extends Component {
 
@@ -17,7 +17,7 @@ class App extends Component {
             <BrowserRouter>
       <div className="App">
         <Switch>
-          <Route path='/login' exact render={() => <LoginForm title="Login Page" />} />
+          <Route path='/login' exact component={LoginForm} />
           <Redirect exact from='/' to='/login' />
           <Route path="/articles/create" exact render={()=><ArticleWrite mode="create"/>}/>
           <Route path="/articles" exact render={() =><ArticleList title="ArticleList!" /> } />

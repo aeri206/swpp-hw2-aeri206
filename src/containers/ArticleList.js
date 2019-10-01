@@ -35,7 +35,7 @@ class ArticleList extends Component {
       });
     return (
     <div className="ArticleList">
-      <LogoutForm/>
+      <LogoutForm history={this.props.history}/>
     <div className='title'>
       {this.props.title}
     </div>

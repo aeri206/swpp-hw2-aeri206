@@ -74,32 +74,43 @@ export const deleteComment = id => {
   }
 }
 
-export const logout_ = () => {
-  return {type: types.LOGOUT}
+export const logout_ = id => {
+  return {type: types.LOGOUT, id}
 }
 
-export const logout = id => {
+export const logout = (id, ownProps) => {
   return dispatch => {
-    dispatch(logout_());
     return axios.get(`/api/user/${id}`)
       .then(res => {
         const newUser = {...res.data, logged_in : false};
-        axios.put(`/api/user/${id}`, newUser).then(() => dispatch(getUsers()))
+        axios.put(`/api/user/${id}`, newUser).then(() => {
+          dispatch(logout_(id))
+          ownProps.history.push('/login')
+        }
+          )
       })
   }
 }
 
 export const login_ = id => {
-  return {type: types.LOGIN, id: id};
+  return {type: types.LOGIN, id};
 }
 
-export const login = id => {
+export const alreadyLogined = id => {
+  return dispatch => {
+  dispatch({type: types.ALREADYLOGIN, id});
+  }
+}
+
+export const login = (id, ownProps) => {
   return dispatch => {
     dispatch(login_(id));
     return axios.get(`/api/user/${id}`)
       .then(res => {
         const newUser = {...res.data, logged_in : true};
-        axios.put(`/api/user/${id}`,newUser).then(() => dispatch(getUsers()))
+        axios.put(`/api/user/${id}`,newUser)
+          .then(
+            ownProps.history.push('/articles/'))
       })
   }
 }

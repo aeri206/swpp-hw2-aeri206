@@ -3,13 +3,13 @@ import * as actionCreators from "../actions/index";
 import { connect } from "react-redux";
 
 class LogoutForm extends Component {
-    onClickButton = id => {
-        console.log("hello");
-        this.props.onRemoveLoginUser(id);
+    onClickButton = () => {
+        const id = this.props.loginedUser.id;
+        this.props.onRemoveLoginUser(id, this.props);
+        
     }
     render(){
-        const user = this.props.loginedUser.id;
-        return(<button onClick={() => {this.onClickButton(user)}}id="logout-button">Logout</button>)
+        return(<button onClick={this.onClickButton}id="logout-button">Logout</button>)
     }
 }
 const mapStateToProps = state => {
@@ -20,7 +20,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onRemoveLoginUser: id => dispatch(actionCreators.logout(id))
+        onRemoveLoginUser: (id, ownProps) => dispatch(actionCreators.logout(id, ownProps))
     }
 }
 
