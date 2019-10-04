@@ -1,50 +1,69 @@
 import React, { Component } from "react";
 
 import { Redirect } from 'react-router-dom';
+import * as ActionCreators from "../actions/index";
+import { connect } from "react-redux";
 
 class LoginForm extends Component {
+  componentDidMount(){
+    this.props.onGetAllUser();
+  }
   state={
     "email-input": "",
-    "password-input": "",
-    logined: false
+    "pw-input": ""
   }
   handleChange = e => {
-    console.log(this.state);
     this.setState(
       {[e.target.id] : e.target.value}
     );
   }
   tryLogin = () => {
-    if (this.state["email-input"] === "swpp@snu.ac.kr" && this.state["password-input"] === "iluvswpp"){
-      this.setState({loginSucceed : true});
+    if (this.state["email-input"] === "swpp@snu.ac.kr" && this.state["pw-input"] === "iluvswpp"){
+      this.props.onSetLoginUser(1, this.props);
     }
     else alert ("Email or password is wrong");
   }
   render(){
-    let redirect = null;
-    if (this.state.logined) {
-      redirect = <Redirect to='/articles' />
+    if (this.props.storedUsers !== null) {
+      const loginedUser = this.props.storedUsers.filter(user => user.logged_in);
+      if(loginedUser.length === 1){
+        const {id} = loginedUser[0];
+        this.props.onUpdateLoginUser(id);
+        return (<Redirect to='/articles' />)
+      }
     }
     return(
       <div>
-        {redirect}
         <form><input
           id="email-input"
           placeholder="email"
           onChange={this.handleChange}
-          
           />
           <input
           id="pw-input"
           placeholder="password"
           onChange={this.handleChange}
-          // value={this.state.phone}
           />
           </form>
-          <button id="login-button" onClick={() => this.tryLogin()}>Login</button>
+          <button id="login-button" onClick={this.tryLogin}>Login</button>
           </div>
       );
     }
   }
+
+  const mapStateToProps = state => {
+    return {
+      storedUsers: state.userData.users,
+      loginedUser : state.userData.loginedUser
+    }
+  }
+
+  const mapDispatchToProps = dispatch => {
+    return {
+      onGetAllUser: () => dispatch(ActionCreators.getUsers()),
+      onSetLoginUser: (id, ownProps) => dispatch(ActionCreators.login(id, ownProps)),
+      onUpdateLoginUser : (id) => dispatch(ActionCreators.alreadyLogined(id))
+    }
+  }
   
-  export default LoginForm;
+  export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
