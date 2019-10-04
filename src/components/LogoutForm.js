@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import * as actionCreators from "../actions/index";
 import { connect } from "react-redux";
 
+import './LogoutForm.css';
+
 class LogoutForm extends Component {
     onClickButton = () => {
         const id = this.props.loginedUser.id;

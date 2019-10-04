@@ -54,7 +54,7 @@ class CommentList extends Component {
             )
         });
         return(
-        <div>CommentList
+        <div className="commentList"> <span className="title"> Comment List </span>
             <div>{selected}</div>
             <input id="new-comment-content-input" onChange={this.handleChange}></input>
             <button id="confirm-create-comment-button" onClick={() => this.onCreateComment()}>Create Comment</button>

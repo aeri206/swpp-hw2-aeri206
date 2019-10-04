@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import "./Comment.css";
 
 
 class Comment extends Component {
@@ -16,11 +16,10 @@ class Comment extends Component {
     render(){
         const btn = this.props.editable? <div><button id="edit-comment-button" onClick={() => {this.onClickEdit()}}>Edit</button>
         <button id="delete-comment-button" onClick={() => this.onClickDelete()}>Delete</button></div> : <div></div>
-        const style = {border: "1px solid gold"};
         return(
-        <div  className="Comment" style={style}>
-                <div> author : {this.props.author} content : {this.props.content}</div>
-            {btn}
+        <div  className="Comment">
+                <div> <span className="author">{this.props.author} </span><span className="commentcontent">{this.props.content}</span>{btn}</div>
+            
         </div>
     
         );
