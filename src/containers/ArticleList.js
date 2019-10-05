@@ -7,7 +7,7 @@ import { withRouter } from 'react-router';
 import { Redirect } from 'react-router-dom';
 import Article from "../components/Article";
 import LogoutForm from "../components/LogoutForm";
-
+import "./ArticleList.css";
 class ArticleList extends Component {
     componentDidMount() {
         this.props.onGetAllArticles();
@@ -34,25 +34,24 @@ class ArticleList extends Component {
         );
       });
     return (
-    <div className="ArticleList">
+    <div className="articleList">
+      <div className='userInfo'>
+      Logined as 
+      <span className="author">&nbsp;{this.props.loginedUser.name}&nbsp;</span>
+      ( <span className="account">&nbsp;{this.props.loginedUser.email}&nbsp;</span>)
       <LogoutForm history={this.props.history}/>
+    </div>
     <div className='title'>
-      {this.props.title}
-    </div>
-    <div className='user'>
-      Logined Information <p/>
-      name : {this.props.loginedUser.name} <p/>
-      email : {this.props.loginedUser.email} <p/>
-    </div>
+    <span> {this.props.title} </span>
     <button id="create-article-button" onClick={this.onClickCreate}>Create Article</button>
-    <div>{articles}</div>
+    </div>
+    <div className="articleInfo">{articles}</div>
     
   </div>);
         
     }
 }
 
-// <NavLink to='/new-todo' exact>New Todo</NavLink>
 const mapStateToProps = state => {
     return {
       storedArticles : state.articleData.articles,

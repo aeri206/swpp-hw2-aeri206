@@ -1,0 +1,24 @@
+div.Article {
+    text-align:left;
+    padding:3px;
+    border-top:inset;
+    border-top-color:grey;
+    border-top-width:thin;
+}
+
+div.content {
+    margin: 10px 10px 20px 40px;
+}
+span.id {
+    display:inline-block;
+    width:25px;
+    text-align : center;
+}
+
+div.info span.account {
+    float:right;
+}
+
+div.info {
+    margin-top:5px;
+}

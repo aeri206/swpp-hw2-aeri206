@@ -22,7 +22,7 @@ class ArticleDetail extends Component {
         this.props.history.push('/articles/' + ar.id +'/edit');
     }
     render(){
-        if (this.props.loginedUser === null) return (<Redirect to='/login' />);
+        if (this.props.loginedUser === null) {return (<Redirect to='/login' />);}
         const ar = this.props.selectedArticle;
         let author = this.props.storedUsers.filter(user => user.id === ar.author_id);
         let name;

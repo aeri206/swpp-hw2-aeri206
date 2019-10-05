@@ -4,6 +4,8 @@ import { Redirect } from 'react-router-dom';
 import * as ActionCreators from "../actions/index";
 import { connect } from "react-redux";
 
+import './LoginForm.css';
+
 class LoginForm extends Component {
   componentDidMount(){
     this.props.onGetAllUser();
@@ -33,8 +35,9 @@ class LoginForm extends Component {
       }
     }
     return(
-      <div>
-        <form><input
+      <React.Fragment>
+        <div className="LoginForm">
+        <input
           id="email-input"
           placeholder="email"
           onChange={this.handleChange}
@@ -44,9 +47,9 @@ class LoginForm extends Component {
           placeholder="password"
           onChange={this.handleChange}
           />
-          </form>
           <button id="login-button" onClick={this.tryLogin}>Login</button>
           </div>
+          </React.Fragment>
       );
     }
   }
