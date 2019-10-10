@@ -27,13 +27,11 @@ class CommentList extends Component {
         this.props.onDeleteComment(id);
     }
     onCreateComment(){
-        if(this.state.content === "") return;
         const newComment = {};
         newComment.article_id = this.props.article_id;
         newComment.author_id = this.props.loginedUser.id;
         newComment.content = this.state.content;
         this.props.onCreateComment(newComment);
-
     }
     render(){
         const ar = this.props.selectedArticle;
@@ -53,12 +51,14 @@ class CommentList extends Component {
                 />
             )
         });
+        const confirmBtn = (this.state.content==="")?
+        <button id="confirm-create-comment-button" disabled={true}>Create Comment</button>:
+        <button id="confirm-create-comment-button" onClick={() => this.onCreateComment()}>Create Comment</button>;
         return(
         <div className="commentList"> <span className="title"> Comment List </span>
             <div>{selected}</div>
             <input id="new-comment-content-input" onChange={this.handleChange}></input>
-            <button id="confirm-create-comment-button" onClick={() => this.onCreateComment()}>Create Comment</button>
-        
+            {confirmBtn}
         </div>);
     }
 }

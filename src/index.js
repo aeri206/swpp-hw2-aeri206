@@ -13,18 +13,6 @@ import thunk from "redux-thunk";
 
 
 
-const logger = store => {
-    return next => {
-      return action => {
-//       console.log('[Middleware] Dispatching', action);
-        const result = next(action);
-     //  console.log('[Middleware] Next State', store.getState());
-        return result;
-      };
-    };
-  };
-  
-
 const rootreducer = combineReducers({
     articleData : articleReducers,
     userData : userReducers,

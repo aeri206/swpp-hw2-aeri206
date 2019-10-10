@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import * as ActionCreators from "../actions/index";
 import { connect } from "react-redux";
 
@@ -69,4 +70,4 @@ class LoginForm extends Component {
     }
   }
   
-  export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+  export default connect(mapStateToProps, mapDispatchToProps)(withRouter(LoginForm));

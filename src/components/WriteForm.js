@@ -45,9 +45,9 @@ class WriteForm extends Component {
     render(){
         const writeStyle = this.state.preview ? {visibility: "hidden"} : {visibility: "visible"};
         const previewStyle = this.state.preview ? {visibility:"visible"} : {visibility: "hidden"}; 
-        const confirmStyle = (this.state["article-title-input"] === "" || this.state["article-content-input"] === "") ?
-        {visibility: "hidden"} : {visibility: "visible"};
-        
+        const confirmBtn = (this.state["article-title-input"] === "" || this.state["article-content-input"] === "")?
+        (<button disabled={true} id={`confirm-${this.mode}-article-button`}>Confirm</button>):
+        (<button id={`confirm-${this.mode}-article-button`} onClick={this.onClickConfirm} >Confirm</button>);
         return(<div>
             <div style={writeStyle}> title : <input 
                 id="article-title-input" 
@@ -61,9 +61,7 @@ class WriteForm extends Component {
                 ></input></div>
             <button id={`back-${this.mode}-article-button`} 
                 onClick={this.onClickBack}>back</button>
-            <button style={confirmStyle}
-                id={`confirm-${this.mode}-article-button`} 
-               onClick={this.onClickConfirm} >Confirm</button>
+            {confirmBtn}
             <div>
             <button id="preview-tab-button" 
                 onClick={() => {this.setState({preview:true})}}> PREVIEW </button>

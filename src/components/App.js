@@ -8,7 +8,6 @@ import ArticleList from "../containers/ArticleList";
 import ArticleDetail from "../containers/ArticleDetail";
 import ArticleWrite from "../containers/ArticleWrite";
 
-
 class App extends Component {
 
     render() {  
@@ -16,8 +15,8 @@ class App extends Component {
             <BrowserRouter>
       <div className="App">
         <Switch>
-          <Route path='/login' exact component={LoginForm} />
           <Redirect exact from='/' to='/login' />
+          <Route path='/login/' exact render={()=><LoginForm />}/>
           <Route path="/articles/create" exact render={()=><ArticleWrite mode="create"/>}/>
           <Route path="/articles" exact render={() =><ArticleList title="Article List" /> } />
           <Route path='/articles/:id' exact component={ArticleDetail} />

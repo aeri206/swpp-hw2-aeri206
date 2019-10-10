@@ -11,7 +11,7 @@ export const getArticles_ = articles => {
       return axios.post('/api/comments', cm)
         .then(() => {
           dispatch(getComments());
-        })
+        }).catch();
     }
   }
 export const createArticle = (ar, ownProps) => {
@@ -20,7 +20,7 @@ export const createArticle = (ar, ownProps) => {
       .then(res => {
         ownProps.history.push('/articles/' + res.data.id);
         dispatch(getArticles());
-      });
+      }).catch();
 
   }
 }
@@ -30,7 +30,7 @@ export const updateComment = (comment) => {
     return axios.put(`/api/comments/${comment.id}`, comment)
       .then(() => {
         dispatch(getComments());
-      })
+      }).catch();
 
   }
 }
@@ -39,14 +39,15 @@ export const updateArticle = (ar, ownProps) => {
     return axios.put(`/api/articles/${ar.id}`, ar)
       .then(() => {
         ownProps.history.goBack();
-      });
+      }).catch();
   }
 }
 
 export const getArticles = () => {
   return dispatch => {
     return axios.get('/api/articles')
-      .then(res => dispatch(getArticles_(res.data)));
+      .then(res => dispatch(getArticles_(res.data)))
+      .catch();
   };
 };
 
@@ -57,7 +58,8 @@ export const getComments_ = comments => {
 export const getComments = () => {
   return dispatch => {
     return axios.get('/api/comments')
-      .then(res => dispatch(getComments_(res.data)));
+      .then(res => dispatch(getComments_(res.data)))
+      .catch();
   }
 }
 
@@ -69,7 +71,8 @@ export const deleteArticle = id => {
 export const deleteComment = id => {
   return dispatch => {
     return axios.delete(`/api/comments/${id}`)
-      .then(() => {dispatch(getComments());
+      .then(() => {dispatch(getComments())
+        .catch();
       })
   }
 }
@@ -88,7 +91,9 @@ export const logout = (id, ownProps) => {
           ownProps.history.push('/login')
         }
           )
+          .catch();
       })
+      .catch();
   }
 }
 
@@ -111,7 +116,9 @@ export const login = (id, ownProps) => {
         axios.put(`/api/user/${id}`,newUser)
           .then(
             ownProps.history.push('/articles/'))
+            .catch();
       })
+      .catch();
   }
 }
 
@@ -121,7 +128,8 @@ export const getUsers_ = users => {
 export const getUsers = () => {
   return dispatch => {
     return axios.get('/api/user')
-      .then(res => dispatch(getUsers_(res.data)));
+      .then(res => dispatch(getUsers_(res.data)))
+      .catch();
   }
 }
 
@@ -134,6 +142,7 @@ export const getArticleDetail = id => {
   return dispatch => {
     return axios.get(`/api/articles/${id}`)
       .then(res => dispatch(getArticleDetail_(res.data)))
+      .catch();
   }
 };
 

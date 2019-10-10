@@ -34,7 +34,7 @@ class ArticleDetail extends Component {
             if (author[0].id === this.props.loginedUser.id) style.visibility = "visible";
         }
         return(
-            <div>
+            <div className="ArticleDetail">
                 <LogoutForm history={this.props.history}/>
                 <h2 id='article-title'>{ar.title}</h2>
                 <h3 id='article-author'>{name}</h3>
