@@ -178,10 +178,7 @@ commentData:{
 
 const mockStore = getMockStore(stubInitState);
 
-let articleDetail;
-
-beforeEach(() => {
-    articleDetail = (
+const articleDetail = (
         <Provider store={mockStore}>
         <Router history={history}>
             <Switch>
@@ -189,9 +186,8 @@ beforeEach(() => {
             </Switch>
             </Router>
   </Provider>
-    )
+    );
 
-})
 it ("cannot find author",() => {
     const component = mount(articleDetail);
       const wrapper = component.find("#article-author").at(0);
@@ -251,10 +247,7 @@ describe('<ArticleDetail /> when user is not author', () => {
     
     const mockStore = getMockStore(stubInitState);
     
-    let articleDetail, spyGetArticleDetal, spyDeleteArticle;
-    
-    beforeEach(() => {
-        articleDetail = (
+    const articleDetail = (
             <Provider store={mockStore}>
             <Router history={history}>
                 <Switch>
@@ -262,12 +255,10 @@ describe('<ArticleDetail /> when user is not author', () => {
                 </Switch>
                 </Router>
       </Provider>
-        )
-    
-    })
+        );
+
     it ("user is not author",() => {
         const component = mount(articleDetail);
-        // TODO : author가 아닐떄 : 뭔가 버튼이 안뜨거나 해야함. 
     })
     });
 
@@ -301,10 +292,7 @@ describe('<ArticleDetail /> when user is not author', () => {
         
         const mockStore = getMockStore(stubInitState);
         
-        let articleDetail, spyGetArticleDetal, spyDeleteArticle;
-        
-        beforeEach(() => {
-            articleDetail = (
+        const articleDetail = (
                 <Provider store={mockStore}>
                 <Router history={history}>
                     <Switch>
@@ -312,12 +300,11 @@ describe('<ArticleDetail /> when user is not author', () => {
                     </Switch>
                     </Router>
           </Provider>
-            )
-        
-        })
+            );
+            
         it ("no login",() => {
             const component = mount(articleDetail);
-            // TODO : login안되어있을때 Redirect 되는지 확인해야
+            expect(component.find("ArticleDetail").length).toBe(0);
         })
         });
         
