@@ -21,7 +21,7 @@ class App extends Component {
           <Route path="/articles" exact render={() =><ArticleList title="Article List" /> } />
           <Route path='/articles/:id' exact component={ArticleDetail} />
           <Route path="/articles/:id/edit" exact render={()=><ArticleWrite mode="edit"/>}/>
-          <Route render={() => <h1>Not Founddd</h1>} />
+          <Route render={() => <Redirect to ='/login'/>}/>
         </Switch>
       </div>
     </BrowserRouter>
