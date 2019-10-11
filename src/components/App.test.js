@@ -4,13 +4,11 @@ import { Provider } from "react-redux";
 import { getMockStore } from "../test-utils/mocks";
 import { createBrowserHistory } from 'history';
 import App from "./App";
-import { exportAllDeclaration } from "@babel/types";
+import { Route } from "react-router-dom";
 
 
 import LoginForm from "./LoginForm";
 import ArticleList from "../containers/ArticleList";
-import ArticleDetail from "../containers/ArticleDetail";
-import ArticleWrite from "../containers/ArticleWrite";
 import axios from 'axios';
 
 
@@ -71,11 +69,9 @@ describe('<App />', () => {
         expect(wrapper.length).toBe(1);
     });
 
-    it('should be redirected to error page', () => {
+    it('should be redirected to login page with wrong path', () => {
         history.push('/aaa');
         const component = mount(app);
-        expect(component.find('h1').text()).toBe('Not Founddd');
+        expect(component.find(Route).props().path).toBe('/login/')
       })
-      
-
 });
