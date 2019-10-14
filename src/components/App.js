@@ -16,7 +16,7 @@ class App extends Component {
       <div className="App">
         <Switch>
           <Redirect exact from='/' to='/login' />
-          <Route path='/login/' exact render={()=><LoginForm />}/>
+          <Route path='/login/' exact component={LoginForm}/>
           <Route path="/articles/create" exact render={()=><ArticleWrite mode="create"/>}/>
           <Route path="/articles" exact render={() =><ArticleList title="Article List" /> } />
           <Route path='/articles/:id' exact component={ArticleDetail} />
